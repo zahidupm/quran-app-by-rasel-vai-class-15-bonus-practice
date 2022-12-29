@@ -18,14 +18,13 @@
           </div>
 
           <div class="flex-1 px-4 text-center">
-            <h3 class="font-bold mb-1 text-lg">Al-Baqrah</h3>
-            <p>The Cow</p>
-          </div>
-
-          <div class="flex-1 px-4">
-            <select class="quran-input" name="" id="">
-              <option value="">Select Ayah</option>
-            </select>
+            <h3 class="font-bold mb-1 text-lg">
+              {{ currentSura.name }} - {{ currentSura.englishName }}
+            </h3>
+            <p>
+              {{ currentSura.englishNameTranslation }} | Ayahs -
+              {{ currentSura.numberOfAyahs }}
+            </p>
           </div>
         </div>
 
