@@ -6,7 +6,7 @@
           <div class="flex-1 px-4 mb-6">
             <select class="quran-input" name="" id="">
               <option value="">Select Surah</option>
-              <option v-for="sura in suras" value="">
+              <option v-for="sura in suras" :value="sura.number">
                 {{ sura.name }} - {{ sura.englishName }}
               </option>
             </select>
@@ -25,10 +25,17 @@
         </div>
 
         <div class="">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam,
-            animi cumque at natus eos hic sunt debitis deleniti consequuntur
-            corrupti?
+          <p
+            class="flex"
+            v-if="currentSura.hasOwnProperty('ayahs')"
+            v-for="ayah in currentSura.ayahs"
+          >
+            <span
+              class="text-xs mr-2 h-4 w-4 rounded-full flex text-center justify-center border"
+              >{{ ayah.number }}
+            </span>
+            -
+            {{ ayah.text }}
           </p>
         </div>
       </div>
@@ -43,11 +50,15 @@ export default {
   data() {
     return {
       suras: [],
+      currentSura: [],
     };
   },
   mounted() {
     axios.get(`https://api.alquran.cloud/v1/surah`).then((res) => {
       this.suras = res.data.data;
+    });
+    axios.get(`http://api.alquran.cloud/v1/surah/1`).then((res) => {
+      this.currentSura = res.data.data;
     });
   },
 };
